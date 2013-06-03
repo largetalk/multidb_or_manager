@@ -6,7 +6,9 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'multidb.views.home', name='home'),
+    url(r'^$', 'main.views.home', name='home'),
+    url(r'^2$', 'main.views.home2', name='home2'),
+    url(r'^pset$', 'main.views.pset', name='pset'),
     # url(r'^multidb/', include('multidb.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
