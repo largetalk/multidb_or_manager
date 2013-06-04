@@ -2,7 +2,7 @@
 #
 from django.http import HttpResponse
 from main.models import Project, Entry
-
+import random
 
 def home(request):
     projects = Project.objects.all()
@@ -10,6 +10,10 @@ def home(request):
     return HttpResponse('abcd')
 
 def home2(request):
+    e = Entry(name='Entry' + str(random.random())) #will save into main_db
+    e.save()
+
+    Entry.objects.create(name='create' + str(random.random()))
     entries = Entry.objects.all()
     print '####', entries
     return HttpResponse('asdfg')
