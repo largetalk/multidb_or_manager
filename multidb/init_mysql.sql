@@ -5,11 +5,11 @@ grant all privileges on main_db.* to 'multidb'@'localhost' identified by '1234';
 
 create database if not exists sub_db1;
 grant all privileges on sub_db1.* to 'sub1'@'%' identified by '1234';
-grant all privileges on sub_db1.* to 'multidb'@'localhost' identified by '1234';
+grant all privileges on sub_db1.* to 'sub1'@'localhost' identified by '1234';
 
 create database if not exists sub_db2;
 grant all privileges on sub_db2.* to 'sub2'@'%' identified by '1234';
-grant all privileges on sub_db2.* to 'multidb'@'localhost' identified by '1234';
+grant all privileges on sub_db2.* to 'sub2'@'localhost' identified by '1234';
 
 BEGIN;
 use main_db;

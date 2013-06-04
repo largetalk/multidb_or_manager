@@ -20,3 +20,6 @@ class Entry(models.Model):
     name = models.CharField(max_length=100)
 
     objects = MultiDBManager()
+
+    def __unicode__(self):
+        return 'Entry, name: %s' % (self.name, )

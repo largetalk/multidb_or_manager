@@ -12,9 +12,31 @@ except ImportError:
 class MultiDBManager(models.Manager):
 
     def get_query_set(self):
+        _db = self.get_db()
+        if _db:
+            self._db = _db
         qs = super(MultiDBManager, self).get_query_set()
-        qs.query.connection = self.get_db_wrapper()
+        #qs.query.connection = self.get_db_wrapper()
         return qs
+
+    def get_db(self):
+        from main.models import Project
+        pcode = getattr(thread_local_data, 'project', None)
+        if not pcode:
+            return None
+        else:
+            project = Project.objects.get(project_code=pcode)
+            database = {
+                    'ENGINE': 'django.db.backends.mysql', 
+                    'NAME': project.db_name,
+                    'USER': project.db_user,
+                    'PASSWORD': project.db_passwd,
+                    'HOST': project.db_host,
+                    'PORT': str(project.db_port),
+                    }
+            settings.DATABASES[pcode] = database
+            print settings.DATABASES
+            return pcode
 
     def get_db_wrapper(self):
         from main.models import Project
